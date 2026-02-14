@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="RecruitAI - An AI-powered recruitment screening agent that analyzes resumes against job descriptions using ScaleDown and Google Gemini APIs.">
+    <title>RecruitAI - Recruitment Screening Agent</title>
+    <link rel="icon" href="logo.png" type="image/png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 7 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+    <!-- Application Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Marked.js v16 for rendering Markdown output from AI -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/16.3.0/lib/marked.umd.min.js"></script>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="app-container">
+
+        <!-- Header -->
+        <header class="glass-header">
+            <div class="logo">
+                <img src="logo.png" alt="RecruitAI Logo" class="logo-icon">
+                <h1>RecruitAI</h1>
+            </div>
+            <div class="actions">
+                <button id="settings-btn" class="icon-btn" title="API Settings"><i
+                        class="fa-solid fa-gear"></i></button>
+                <button id="theme-toggle" class="icon-btn" title="Toggle Theme"><i
+                        class="fa-solid fa-moon"></i></button>
+            </div>
+        </header>
+
+        <!-- Settings Panel -->
+        <div id="settings-panel" class="glass-card settings-panel hidden">
+            <h3>API Configuration</h3>
+            <div class="input-group">
+                <label>ScaleDown Key</label>
+                <div class="password-wrapper">
+                    <input type="password" id="scaledown-key" placeholder="Enter ScaleDown API Key">
+                    <button type="button" class="eye-toggle" data-target="scaledown-key"><i
+                            class="fa-solid fa-eye"></i></button>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Gemini Key</label>
+                <div class="password-wrapper">
+                    <input type="password" id="gemini-key" placeholder="Enter Gemini API Key">
+                    <button type="button" class="eye-toggle" data-target="gemini-key"><i
+                            class="fa-solid fa-eye"></i></button>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Gemini Model</label>
+                <select id="gemini-model">
+                    <option value="" disabled selected>Enter API key to load models</option>
+                </select>
+            </div>
+            <button id="save-keys" class="primary-btn small">Save Keys</button>
+        </div>
+
+        <!-- Main Dashboard -->
+        <main class="dashboard-grid">
+
+            <!-- Left Panel: Input -->
+            <section class="glass-card input-section">
+                <h2><i class="fa-solid fa-briefcase"></i> Job Description</h2>
+                <textarea id="job-description" placeholder="Paste the Job Description here..." rows="8"></textarea>
+
+                <h2 class="mt-4"><i class="fa-solid fa-file-pdf"></i> Candidates</h2>
+                <div class="upload-area" id="drop-zone">
+                    <input type="file" id="resume-upload" accept=".pdf" multiple hidden>
+                    <div class="upload-content">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <p>Upload Resumes (PDF)</p>
+                        <small>Drag & Drop or Click (Batch supported)</small>
+                    </div>
+                </div>
+                <div id="upload-stats" class="file-list"></div>
+                <button id="process-btn" class="primary-btn mt-4" disabled>
+                    <i class="fa-solid fa-microchip"></i> Start Screening
+                </button>
+                <div id="compression-stats" class="compression-stats hidden">
+                    <i class="fa-solid fa-compress"></i>
+                    <span id="compression-text"></span>
+                </div>
+            </section>
+
+            <!-- Right Panel: Results -->
+            <section class="glass-card results-section">
+                <h2><i class="fa-solid fa-list-ol"></i> Candidate Ranking</h2>
+                <div class="table-container">
+                    <table id="results-table">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Name</th>
+                                <th>Score</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="candidates-body">
+                            <tr class="empty-state">
+                                <td colspan="5">No candidates processed yet.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Candidate Detail View -->
+                <div id="detail-view" class="detail-view hidden">
+                    <div class="detail-header">
+                        <h3 id="candidate-name">Candidate Name</h3>
+                        <button class="icon-btn close-detail"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="analysis">Analysis</button>
+                        <button class="tab-btn" data-tab="bias">Bias Audit</button>
+                        <button class="tab-btn" data-tab="culture">Culture Fit</button>
+                        <button class="tab-btn" data-tab="questions">Interview Questions</button>
+                        <button class="tab-btn" data-tab="offer">Offer Letter</button>
+                    </div>
+                    <div class="tab-content">
+                        <div id="tab-analysis" class="tab-pane active markdown-body"></div>
+                        <div id="tab-bias" class="tab-pane markdown-body"></div>
+                        <div id="tab-culture" class="tab-pane markdown-body"></div>
+                        <div id="tab-questions" class="tab-pane markdown-body"></div>
+                        <div id="tab-offer" class="tab-pane markdown-body"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Application Logic (ES Module for PDF.js v5 compatibility) -->
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>

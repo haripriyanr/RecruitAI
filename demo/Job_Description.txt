@@ -1,0 +1,43 @@
+Senior Full-Stack Developer – AI-Powered SaaS Platform
+
+Location: Remote (US/India)
+Company: NovaTech Solutions
+Employment Type: Full-Time
+
+About the Role:
+We are looking for a Senior Full-Stack Developer to join our engineering team building an AI-powered SaaS platform for enterprise clients. You will design, build, and maintain scalable web applications, integrate AI/ML APIs, and collaborate closely with product and design teams.
+
+Responsibilities:
+- Design, develop, and maintain full-stack web applications using React.js, Node.js, and Python
+- Build and integrate RESTful APIs and third-party services (OpenAI, Google Cloud, AWS)
+- Architect scalable, secure backend systems using PostgreSQL, MongoDB, and Redis
+- Implement CI/CD pipelines, automated testing, and deployment workflows
+- Write clean, well-documented, production-quality code following best practices
+- Collaborate with UI/UX designers to deliver pixel-perfect, responsive interfaces
+- Mentor junior developers and conduct code reviews
+- Participate in Agile/Scrum ceremonies and contribute to sprint planning
+
+Requirements:
+- 4+ years of professional experience in full-stack web development
+- Strong proficiency in JavaScript/TypeScript, React.js, and Node.js
+- Experience with Python and at least one Python web framework (Django/Flask/FastAPI)
+- Hands-on experience with cloud platforms (AWS, GCP, or Azure)
+- Solid understanding of SQL and NoSQL databases
+- Familiarity with Docker, Kubernetes, and CI/CD tools (GitHub Actions, Jenkins)
+- Experience with REST APIs and GraphQL
+- Strong understanding of version control (Git) and collaborative development workflows
+- Excellent problem-solving skills and attention to detail
+
+Preferred Qualifications:
+- Experience integrating AI/ML models or APIs into production applications
+- Knowledge of WebSocket, Server-Sent Events, or real-time data streaming
+- Contributions to open-source projects
+- Experience with microservices architecture
+- Bachelor's degree in Computer Science, Engineering, or related field (or equivalent experience)
+
+What We Offer:
+- Competitive salary ($120K–$160K) + equity
+- Flexible remote work policy
+- Health, dental, and vision insurance
+- Learning and development budget
+- Annual team retreats
